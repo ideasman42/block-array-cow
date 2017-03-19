@@ -1,0 +1,12 @@
+[package]
+name = "array-cow"
+version = "0.1.0"
+authors = ["Campbell Barton <ideasman42@gmail.com>"]
+description = "In memory array de-duplication, useful for efficient storing of a history of data versions."
+documentation = "https://docs.rs/array-cow"
+homepage = "https://github.com/ideasman42/array-cow-rs"
+readme = "readme.rst"
+license = "Apache-2.0"
+categories = ["algorithms", "data-structures"]
+
+[dependencies]
