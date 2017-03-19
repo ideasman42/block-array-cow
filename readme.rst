@@ -31,7 +31,8 @@ Unsupported
 In general operations that would use excessive calculation are avoided,
 since there are many possible changes that would improve memory usage at the cost of performance.
 
-- Re-aligning of single-user parent block boundaries to reduce the size of duplicate blocks when changes are found.
+- Re-aligning of single-user reference block boundaries
+  to reduce the size of duplicate blocks when changes are found.
 - Detecting numeric changes to the data (values incremented/decremented, zeroed etc... are not detected).
 - Reversing data.
 
