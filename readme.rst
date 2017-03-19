@@ -83,6 +83,8 @@ Further Work
 
 Some things that may be worth considering.
 
+- It might be useful to make ``BCHUNK_HASH_TABLE_ACCUMULATE_STEPS`` configurable,
+  to control how much of each blocks data contributes to its hash.
 - It may be worth using ``mmap`` for data storage.
 - Block compression
   *(likely based on caller defined rule about when a state's data isn't likely to be read again).*
