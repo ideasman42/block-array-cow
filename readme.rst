@@ -14,6 +14,21 @@ and is effective with both binary and text data.
 The code is Apache2.0 licensed and doesn't have any dependencies.
 
 
+Motivation
+==========
+
+For an undo system (or any other history storage) you may want to store many versions of your data.
+
+In some cases it makes sense to write a
+`persistent data structure <https://en.wikipedia.org/wiki/Persistent_data_structure>`__
+but this depends a lot on the kind of data you're dealing with.
+
+In other cases its nice to have the convenience of being able to serialize your data and store it
+without worrying about the details of how duplication is managed.
+
+Thats the motivation for writing this library.
+
+
 Algorithm
 =========
 
