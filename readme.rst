@@ -26,14 +26,11 @@ but this depends a lot on the kind of data you're dealing with.
 In other cases its nice to have the convenience of being able to serialize your data and store it
 without worrying about the details of how duplication is managed.
 
-Thats the motivation for writing this library.
+That's the motivation for writing this library.
 
 
 Algorithm
 =========
-
-This has a slight emphasis on performance, since this method is used in Blender's undo system.
-Where making users of the application wait for an exhaustive method isn't acceptable.
 
 - A new ``BArrayStore`` is created with a fixed stride and block size.
 - Adding a new state to the array store simply divides the array into blocks and stores them.
@@ -51,6 +48,15 @@ Where making users of the application wait for an exhaustive method isn't accept
 
 
 Where *N* is currently the ``stride * 7``, see: ``BCHUNK_HASH_TABLE_ACCUMULATE_STEPS``.
+
+.. note::
+
+   This has a slight emphasis on performance, since this method is used in an 3D modelers undo system.
+   Where changes accumulate and are freed at run-time.
+
+   The use of fixed sized chunks is better suited to in-memory data storage,
+   compared to a command line utility for creating a one-off binary diff for example -
+   where more exhaustive tests may be preferred.
 
 
 Supported
@@ -74,8 +80,9 @@ since there are many possible changes that would improve memory usage at the cos
 
 - Re-aligning of single-user reference block boundaries
   to reduce the size of duplicate blocks when changes are found.
-- Detecting numeric changes to the data (values incremented/decremented, zeroed etc... are not detected).
-- Reversing data.
+- Detecting numeric changes to the data *(values incremented/decremented, zeroed etc... are not detected)*.
+
+  Blocks either match exactly or not at all.
 
 
 Further Work
