@@ -11,11 +11,31 @@ In memory array de-duplication, useful for efficiently storing many versions of 
 This is suitable for storing undo history for example - where the size of a struct can be used as the stride,
 and is effective with both binary and text data.
 
+The code is Apache2.0 licensed and doesn't have any dependencies.
+
+
+Algorithm
+=========
+
 This has a slight emphasis on performance, since this method is used in Blender's undo system.
 Where making users of the application wait for an exhaustive method isn't acceptable.
-So hashed memory blocks are used to detect duplicates.
 
-The code is Apache2.0 licensed and doesn't have any dependencies.
+- A new ``BArrayStore`` is created with a fixed stride and block size.
+- Adding a new state to the array store simply divides the array into blocks and stores them.
+- Adding another state can use any previous state as a reference, where its blocks will be re-used where possible.
+- Matching blocks at the start/end of the array are checked and copied until s mismatch is found.
+- If a mismatch is found, the reference blocks use a lazily initialized hash of their first *N* bytes.
+  A hash data for the data being added with a value for each stride offset is calculated too.
+
+  Looping over the newly added state data can now perform hash look-ups on the reference chunks
+  and then a full comparison if a match is found.
+
+  In that case the following chunks are tested to see if they match (to avoid further lookups),
+  otherwise a new chunk is allocated.
+- On completion the new state is added which may contain both new and reused chunks from previous states.
+
+
+Where *N* is currently the ``stride * 7``, see: ``BCHUNK_HASH_TABLE_ACCUMULATE_STEPS``.
 
 
 Supported
