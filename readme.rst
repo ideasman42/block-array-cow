@@ -1,7 +1,7 @@
 
-#########
-Array Cow
-#########
+###############
+Block Array Cow
+###############
 
 Introduction
 ============
@@ -11,12 +11,18 @@ In memory array de-duplication, useful for efficiently storing many versions of 
 This is suitable for storing undo history for example - where the size of a struct can be used as the stride,
 and is effective with both binary and text data.
 
+This has a slight emphasis on performance, since this method is used in Blender's undo system.
+Where making users of the application wait for an exhaustive method isn't acceptable.
+So hashed memory blocks are used to detect duplicates.
+
+The code is Apache2.0 licensed and doesn't have any dependencies.
+
 
 Supported
 ---------
 
-- Configurable block sizes.
-- Supports array-stride to avoids overhead of detecting blocks and un-aliened offsets.
+- Caller defined block sizes.
+- Caller defined array-stride to avoids overhead of detecting possible matches it un-aligned offsets.
   *(a stride of 1 for bytes works too)*
 - De-duplication even in the case blocks are completely re-ordered
   *(block hashing is used for de-duplication)*.
@@ -45,3 +51,10 @@ Some things that may be worth considering.
 - It may be worth using ``mmap`` for data storage.
 - Block compression
   *(likely based on caller defined rule about when a state's data isn't likely to be read again).*
+
+
+Links
+=====
+
+- `Crates.io <https://crates.io/crates/block-array-cow>`__.
+- `API docs <https://docs.rs/block-array-cow>`__.
