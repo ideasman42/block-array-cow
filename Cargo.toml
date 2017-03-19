@@ -1,6 +1,6 @@
 [package]
 name = "block-array-cow"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Campbell Barton <ideasman42@gmail.com>"]
 description = "In memory array de-duplication, useful for efficient storing of a history of data versions."
 documentation = "https://docs.rs/block-array-cow"
