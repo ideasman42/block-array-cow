@@ -1,10 +1,10 @@
 // Licensed: Apache 2.0
 
-extern crate array_cow;
+extern crate block_array_cow;
 
 mod rand;
 
-use array_cow::{
+use block_array_cow::{
     BArrayStore,
     BArrayState,
 };

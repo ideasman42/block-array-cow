@@ -87,7 +87,7 @@
 //! # Example
 //!
 //! ```
-//! let mut bs = array_cow::BArrayStore::new(1, 8);
+//! let mut bs = block_array_cow::BArrayStore::new(1, 8);
 //! let data_src_a = b"The quick brown fox jumps over the lazy dog";
 //! let data_src_b = b"The quick brown fox almost jumps over the lazy dog";
 //! let data_src_c = b"The little quick brown fox jumps over the lazy dog!";
@@ -97,13 +97,13 @@
 //! let state_c = bs.state_add(data_src_c, Some(state_b));
 //!
 //! // Check the data is stored correctly
-//! let data_dst = array_cow::BArrayStore::state_data_get_alloc(state_a);
+//! let data_dst = block_array_cow::BArrayStore::state_data_get_alloc(state_a);
 //! assert_eq!(&data_src_a[..], &data_dst[..]);
 //!
-//! let data_dst = array_cow::BArrayStore::state_data_get_alloc(state_b);
+//! let data_dst = block_array_cow::BArrayStore::state_data_get_alloc(state_b);
 //! assert_eq!(&data_src_b[..], &data_dst[..]);
 //!
-//! let data_dst = array_cow::BArrayStore::state_data_get_alloc(state_c);
+//! let data_dst = block_array_cow::BArrayStore::state_data_get_alloc(state_c);
 //! assert_eq!(&data_src_c[..], &data_dst[..]);
 //! ```
 
