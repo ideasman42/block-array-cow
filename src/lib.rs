@@ -825,11 +825,11 @@ fn bchunk_list_fill_from_array(
 const HASH_INIT: u32 = 5381;
 
 #[inline]
-fn hash_data_single(p: u32) -> u32 {
-    return (HASH_INIT << 5) + HASH_INIT + p as u32;
+fn hash_data_single(p: u8) -> u32 {
+    return ((HASH_INIT << 5) + HASH_INIT).wrapping_add((p as i8) as u32);
 }
 
-// hash bytes, from BLI_ghashutil_strhash_n
+// hash bytes
 fn hash_data(key: &[u8]) -> u32 {
     let mut h: u32 = HASH_INIT;
 
@@ -857,9 +857,7 @@ fn hash_array_from_data(
     } else {
         // fast-path for bytes
         for i in 0..data_slice.len() {
-            let a = data_slice[i] as u32;
-            // hash_array[i] = hash_data_single(data_slice[i] as u32) as HashKey;
-            hash_array[i] = hash_data_single(a) as HashKey;
+            hash_array[i] = hash_data_single(data_slice[i]) as HashKey;
         }
     }
 }

@@ -131,6 +131,7 @@ macro_rules! testbuffer_strings_create {
 }
 
 // test in both directions
+#[allow(unused_macros)]
 macro_rules! testbuffer_strings_ex {
     ($bs:expr, $strings:expr) => {
         let mut cl: Vec<TestBuffer> = Vec::new();
@@ -190,7 +191,7 @@ fn testbuffer_list_store_populate(
     bs: &mut BArrayStore, cl: &mut Vec<TestBuffer>,
 ) {
     let mut state_prev: Option<*const BArrayState> = None;
-    for mut tb in cl {
+    for tb in cl {
         tb.state = bs.state_add(&tb.data[..], state_prev);
         state_prev = Some(tb.state);
     }
@@ -199,7 +200,7 @@ fn testbuffer_list_store_populate(
 fn testbuffer_list_store_clear(
     bs: &mut BArrayStore, cl: &mut Vec<TestBuffer>,
 ) {
-    for mut tb in cl {
+    for tb in cl {
         bs.state_remove(tb.state);
         tb.state = null_mut();
     }
